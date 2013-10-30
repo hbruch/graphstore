@@ -20,12 +20,13 @@ package org.gephi.attribute.time;
  * @author mbastian
  */
 public class Interval {
+
+    public static final Interval INFINITY_INTERVAL = new Interval(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+	
     protected final double low;   // the left endpoint
     protected final double high;  // the right endpoint
     protected final boolean lopen; // indicates if the left endpoint is excluded
     protected final boolean ropen; // indicates if the right endpoint is excluded
-    public static final Interval INFINITY_INTERVAL = new Interval(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-	
     public Interval(Interval interval) {
         this.low = interval.low;
         this.high = interval.high;
