@@ -23,6 +23,8 @@ import org.gephi.graph.api.TextProperties;
  * @author mbastian
  */
 public class TextPropertiesImpl implements TextProperties {
+    
+    private static final int DEFAULT_COLOR = 255 << 24; //Alpha set to 1 
 
     protected boolean visible;
     protected int rgba;
@@ -30,7 +32,7 @@ public class TextPropertiesImpl implements TextProperties {
     protected String text;
 
     public TextPropertiesImpl() {
-        this.rgba = 255 << 24;  //Alpha set to 1
+        this.rgba = DEFAULT_COLOR;
         this.size = 1f;
         this.visible = true;
     }
@@ -102,7 +104,11 @@ public class TextPropertiesImpl implements TextProperties {
 
     @Override
     public void setColor(Color color) {
-        this.rgba = (color.getAlpha() << 24) | color.getRGB();
+        if (null == color) {
+            this.rgba = DEFAULT_COLOR;
+        } else {
+            this.rgba = (color.getAlpha() << 24) | color.getRGB();
+        }
     }
 
     @Override
