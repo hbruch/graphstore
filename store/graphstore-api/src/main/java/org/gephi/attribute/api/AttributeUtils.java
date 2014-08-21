@@ -422,6 +422,45 @@ public class AttributeUtils {
     }
 
     /**
+     * Returns true if <em>type</em> is a string type.
+     * <p>
+     * This can be true for static, arrays and dynamic types.
+     *
+     * @param type the type to test
+     * @return true if <em>type</em> is a string type, false otherwise
+     */
+    public static boolean isStringType(Class type) {
+        if (!isSupported(type)) {
+            throw new IllegalArgumentException("Unsupported type " + type.getCanonicalName());
+        }
+        type = getStandardizedType(type);
+        return String.class.isAssignableFrom(type)
+                || String[].class.isAssignableFrom(type)
+                || Character.class.isAssignableFrom(type)
+                || Character[].class.isAssignableFrom(type)
+                || type.equals(TimestampStringSet.class)
+                || type.equals(TimestampCharSet.class);
+    }
+    
+    /**
+     * Returns true if <em>type</em> is a boolean type.
+     * <p>
+     * This can be true for static, arrays and dynamic types.
+     *
+     * @param type the type to test
+     * @return true if <em>type</em> is a boolean type, false otherwise
+     */
+    public static boolean isBooleanType(Class type) {
+        if (!isSupported(type)) {
+            throw new IllegalArgumentException("Unsupported type " + type.getCanonicalName());
+        }
+        type = getStandardizedType(type);
+        return Boolean.class.isAssignableFrom(type)
+                || boolean[].class.isAssignableFrom(type)
+                || type.equals(TimestampBooleanSet.class);
+    }
+
+    /**
      * Returns true if <em>type</em> is a dynamic type.
      *
      * @param type the type to test
