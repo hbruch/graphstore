@@ -42,6 +42,14 @@ public interface TableObserver {
      */
     public boolean hasTableChanged();
 
+    
+    /**
+     * Gets the table difference.
+     *
+     * @return the table diff
+     */
+    public TableDiff getDiff();
+    
     /**
      * Gets the table this observer belongs to.
      *

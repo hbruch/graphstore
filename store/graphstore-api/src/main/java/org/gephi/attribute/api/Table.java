@@ -143,7 +143,9 @@ public interface Table extends Iterable<Column> {
     /**
      * Creates a new table observer and return it.
      *
+     * @param withDiff true, if table obserer should provide column differences
+     *
      * @return a newly created table observer
      */
-    public TableObserver createTableObserver();
+    public TableObserver createTableObserver(boolean withDiff);
 }

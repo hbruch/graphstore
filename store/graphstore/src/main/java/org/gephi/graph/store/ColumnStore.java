@@ -279,11 +279,11 @@ public class ColumnStore<T extends Element> implements Iterable<Column> {
         }
     }
 
-    protected TableObserverImpl createTableObserver(TableImpl table) {
+    protected TableObserverImpl createTableObserver(TableImpl table, boolean withDiff) {
         if (observers != null) {
             lock();
             try {
-                TableObserverImpl observer = new TableObserverImpl(table);
+                TableObserverImpl observer = new TableObserverImpl(table, withDiff);
                 observers.add(observer);
 
                 return observer;

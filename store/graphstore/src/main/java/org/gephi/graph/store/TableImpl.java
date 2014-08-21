@@ -130,8 +130,8 @@ public class TableImpl<T extends Element> implements Table {
     }
 
     @Override
-    public TableObserver createTableObserver() {
-        return store.createTableObserver(this);
+    public TableObserver createTableObserver(boolean withDiff) {
+        return store.createTableObserver(this, withDiff);
     }
 
     @Override
