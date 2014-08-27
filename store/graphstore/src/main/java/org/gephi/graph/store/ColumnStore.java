@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.gephi.attribute.api.Column;
+import org.gephi.attribute.api.Table;
 import org.gephi.attribute.time.Estimator;
 import org.gephi.attribute.time.TimestampValueSet;
 import org.gephi.graph.api.Element;
@@ -71,7 +72,7 @@ public class ColumnStore<T extends Element> implements Iterable<Column> {
         idMap.defaultReturnValue(NULL_SHORT);
         this.observers = GraphStoreConfiguration.ENABLE_OBSERVERS ? new ArrayList<TableObserverImpl>() : null;
     }
-
+    
     public void addColumn(final Column column) {
         checkNonNullColumnObject(column);
         checkIndexStatus(column);
@@ -362,6 +363,18 @@ public class ColumnStore<T extends Element> implements Iterable<Column> {
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
+        }
+    }
+    
+    /**
+     * Set the table associated with this ColumnStore.
+     * For all columns of this store the table is 
+     * updated if not already set.
+     * @param table 
+     */
+    void setTable(TableImpl table) {
+        for(int i =0; i<length; i++) {
+           columns[i].setTable(table); 
         }
     }
 

@@ -31,7 +31,7 @@ import org.gephi.attribute.time.TimestampValueSet;
 public class ColumnImpl implements Column {
 
     //Attributes
-    protected final TableImpl table;
+    protected TableImpl table;
     protected final String id;
     protected final Class typeClass;
     protected final String title;
@@ -104,6 +104,19 @@ public class ColumnImpl implements Column {
     @Override
     public Table getTable() {
         return table;
+    }
+
+     /**
+     * Set the table this column belongs to.
+     * For all columns of this store the table is 
+     * updated if not already set.
+     * @param table 
+     */
+    void setTable(TableImpl table) {
+        if (this.table!=null) {
+            throw new IllegalArgumentException("Column is already associated with a table");
+        }
+        this.table = table; 
     }
 
     @Override

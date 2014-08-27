@@ -35,6 +35,7 @@ public class TableImpl<T extends Element> implements Table {
 
     public TableImpl(ColumnStore<T> store) {
         this.store = store;
+        this.store.setTable(this);
     }
 
     @Override
