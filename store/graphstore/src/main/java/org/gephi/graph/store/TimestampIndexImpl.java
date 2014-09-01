@@ -265,7 +265,11 @@ public class TimestampIndexImpl<T extends Element> implements TimestampIndex<T> 
 
         @Override
         public boolean hasNext() {
-            return itr.hasNext();
+            final boolean hasNext = itr.hasNext();
+            if (!hasNext) {
+                readUnlock();
+            }
+            return hasNext;
         }
 
         @Override
