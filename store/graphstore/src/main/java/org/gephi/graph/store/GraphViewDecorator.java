@@ -518,6 +518,11 @@ public class GraphViewDecorator implements DirectedSubgraph, UndirectedSubgraph 
     }
 
     @Override
+    public double[] getAttributeTimestamps(String key) {
+        return view.attributes.getTimestamps(key);
+    }
+
+    @Override
     public void setAttribute(String key, Object value) {
         view.attributes.setValue(key, value);
     }

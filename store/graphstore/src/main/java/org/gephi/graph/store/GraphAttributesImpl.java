@@ -82,6 +82,16 @@ public class GraphAttributesImpl {
         valueSet.put(index, value);
     }
     
+    public double[] getTimestamps(String key) {
+        TimestampValueSet valueSet = null;
+        if (attributes.containsKey(key)) {
+            valueSet = (TimestampValueSet) attributes.get(key);
+            final int[] attTimestampIndices = valueSet.getTimestamps();
+            return timestampMap.getTimestamps(attTimestampIndices);
+        }
+        return new double[0];
+    }
+    
     protected void setGraphAttributes(GraphAttributesImpl graphAttributes) {
         timestampMap.setTimestampMap(graphAttributes.timestampMap);
         attributes.putAll(graphAttributes.attributes);

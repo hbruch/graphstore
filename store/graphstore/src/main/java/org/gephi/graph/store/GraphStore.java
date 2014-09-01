@@ -540,6 +540,11 @@ public class GraphStore implements DirectedGraph, DirectedSubgraph {
     public Set<String> getAttributeKeys() {
         return attributes.getKeys();
     }
+    
+    @Override
+    public double[] getAttributeTimestamps(String key) {
+        return attributes.getTimestamps(key);
+    }
 
     @Override
     public void setAttribute(String key, Object value) {

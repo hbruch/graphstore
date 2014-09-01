@@ -18,6 +18,7 @@ package org.gephi.graph.store;
 import java.awt.Color;
 import java.awt.Transparency;
 import java.util.Set;
+import org.gephi.attribute.time.Interval;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -162,4 +163,15 @@ public class GraphAttributesTest {
         Assert.assertTrue(atts1.equals(atts2));
         Assert.assertTrue(atts1.hashCode() == atts2.hashCode());
     }
+    
+    @Test
+    public void testGetTimestamps() {
+        GraphAttributesImpl atts = new GraphAttributesImpl();
+        atts.setValue("foo", 1, 1.0);
+        atts.setValue("bar", 2, 2.0);
+
+        Assert.assertEquals(atts.getTimestamps("foo"), new double[] {1.0});
+        Assert.assertEquals(atts.getTimestamps("bar"), new double[] {2.0});
+    }
+
 }

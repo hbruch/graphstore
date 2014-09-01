@@ -361,6 +361,14 @@ public interface Graph {
     public Set<String> getAttributeKeys();
 
     /**
+     * Gets all timestamps of the attribute with the given key.
+     *
+     * @param key the key
+     * @return an array of all timestamps for the given keys, or an empty array if non ist set
+     */
+    public double[] getAttributeTimestamps(String key);
+    
+    /**
      * Returns true if this graph is directed.
      *
      * @return true if directed, false otherwise

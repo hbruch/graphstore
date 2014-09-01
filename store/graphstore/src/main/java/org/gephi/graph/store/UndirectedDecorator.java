@@ -249,6 +249,11 @@ public class UndirectedDecorator implements UndirectedGraph, UndirectedSubgraph 
     public Set<String> getAttributeKeys() {
         return store.attributes.getKeys();
     }
+    
+    @Override
+    public double[] getAttributeTimestamps(String key) {
+        return store.attributes.getTimestamps(key);
+    }
 
     @Override
     public void setAttribute(String key, Object value) {
