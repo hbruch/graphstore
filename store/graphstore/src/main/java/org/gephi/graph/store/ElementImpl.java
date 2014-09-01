@@ -289,7 +289,17 @@ public abstract class ElementImpl implements Element {
                         throw new RuntimeException(ex);
                     }
                 } else {
-                    dynamicValue = (TimestampValueSet) oldValue;
+                    if (oldValue instanceof TimestampValueSet) {
+                        dynamicValue = (TimestampValueSet) oldValue;
+                    }  else {
+                        // TODO: Especially for weight illegaly a double was set before, clarify where this occures
+                        System.err.println("Old value of column "+column.getId()+" was of type "+oldValue.getClass()+". Overriding it by TimestampValueSet");
+                        try {
+                            attributes[index] = dynamicValue = (TimestampValueSet) column.getTypeClass().newInstance();
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
                 }
 
                 int timestampIndex = timestampMap.getTimestampIndex(timestamp);
@@ -531,9 +541,11 @@ public abstract class ElementImpl implements Element {
         }
     }
 
-    void checkViewExist(final GraphViewImpl view) {
+    void checkViewExist(final GraphView view) {
         graphStore.viewStore.checkNonNullViewObject(view);
-        graphStore.viewStore.checkViewExist(view);
+        if (view instanceof GraphViewImpl) {
+            graphStore.viewStore.checkViewExist((GraphViewImpl) view);
+        }
     }
 
     private static class DynamicValueIterable implements Iterable<Map.Entry<Double, Object>> {
